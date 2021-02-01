@@ -1,6 +1,6 @@
 /*
 adobe Illustrator CS6 script
-Version: 1.0.0
+Version: 1.0.1
 Copyright(c) Tomohiko Namu
 https://namu-ws.com
 */
@@ -21,6 +21,7 @@ for(var i=0; i<selectObj.length; i++){
     }
 }
 
+
 // transpose array
 function transpose (arg){
     var transposeArr = []
@@ -37,8 +38,7 @@ function transpose (arg){
 
 // stroke
 function stroke(arg){
-    var p = activeDocument.pathItems;
-    var shape = p.add();
+    var shape = activeDocument.pathItems.add();
     shape.setEntirePath(arg);
     shape.stroked = true;
     shape.closed = false;
@@ -61,6 +61,9 @@ function checkAndStroke(arg){
                 throw new Error('Defelent number of objects paths')
             }
         }
+
+        // add new layer for stroke
+        activeDocument.layers.add().name = "pathStroke";
 
         // stroke
         for(var m=0; m<transpose(arg).length; m++){
